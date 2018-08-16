@@ -16,6 +16,8 @@
 #include "../util.cpp"
 
 bool in_triangle(point a, point b, point c, point p) {
+  if(degenerate_triangle(a, b, c)) return false;
+
   bool r = to_left(a, b, p);
   bool t = to_left(b, c, p);
   bool z = to_left(c, a, p);
@@ -44,7 +46,7 @@ vector<point> convex_hull(vector<point> A) {
   }
 
   for(int i=0; i<n; i++)
-  if(!non_extreme[i]) CH.push_back(A[i]);
+    if(!non_extreme[i]) CH.push_back(A[i]);
 
   return CH;
 }

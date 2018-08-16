@@ -23,3 +23,8 @@ bool to_left(const point &o, const point &p, const point &q) {
   // returns true if oq is to the left (ccw) of op
   return cross(p - o, q - o) > 0;
 }
+
+bool degenerate_triangle(point &a, point &b, point &c) {
+  // returns true if the points a, b, c are colinear
+  return (cross(a, b) == 0) && (cross(a, c) == 0);
+}
