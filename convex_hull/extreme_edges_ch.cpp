@@ -6,7 +6,7 @@
  * An edge P formed by the points p, q is said to be extreme iff for all the points r
  * belonging to A (except p and q) are in the same side of the plane divided by P.
  *
- * Complexity: O(n ^ 4)
+ * Complexity: O(n ^ 3)
  *
  * This algorithm doesn't ensure that the points are ordered in any way.
  * The order of the CH points will be the same that the order of the
