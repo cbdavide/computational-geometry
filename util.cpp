@@ -6,6 +6,10 @@ struct point {
   point(int _x, int _y) : x(_x), y(_y) {}
   point() {}
 
+  bool operator==(const point &a)const {
+    return (x == a.x) && (y == a.y);
+  }
+
   point operator+(const point &a)const {
     return point(x + a.x, y + a.y);
   }
