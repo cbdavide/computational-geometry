@@ -23,23 +23,12 @@
  */
 #include "../util.cpp"
 
-int lowest_then_leftmost(vector<point> &A) {
-    int ltl = 0, n = A.size();
-
-    for(int i=1; i<n; i++) {
-        if((A[i].y < A[ltl].y) || (A[i].y == A[ltl].y && A[i].x < A[ltl].x))
-            ltl = i;
-    }
-
-    return ltl;
-}
-
 vector<point> convex_hull(vector<point> &A) {
 
     int n = A.size();
     vector<point> CH;
     int ltl = lowest_then_leftmost(A), k = ltl;
-    
+
     do {
         CH.push_back(A[k]);
         int s = -1;
