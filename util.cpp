@@ -23,12 +23,47 @@ int cross(const point &a, const point &b) {
   return (a.x * b.y) - (b.x * a.y);
 }
 
-bool to_left(const point &o, const point &p, const point &q) {
-  // returns true if oq is to the left (ccw) of op
-  return cross(p - o, q - o) > 0;
+int dot(const point &a, const point &b) {
+    return (a.x * b.x) + (a.y * b.y);
 }
 
-bool degenerate_triangle(point &a, point &b, point &c) {
+int area2(const point &p, const point &q, const point &s) {
+    return p.x * q.y - p.y * q.x
+        + q.x * s.y - q.y * s.x
+        + s.x * p.y - s.y * p.x;
+}
+
+bool between(const point &p, const point &k, const point &q) {
+    return dot( p - k , k - q ) > 0;
+}
+
+bool to_left(const point &p, const point &q, const point &k) {
+    int s = area2( p, q, k );
+    if(s > 0) return true; // left
+    if(s < 0) return false; //right
+    return between( p, q, k ); // colinear
+}
+
+bool to_right(const point &p, const point &q, const point &k) {
+    int s = area2( p, q, k );
+    if(s > 0) return false; // left
+    if(s < 0) return true; //right
+    return between( p, q, k ); // colinear
+}
+
+bool degenerate_triangle(point a, point b, point c) {
   // returns true if the points a, b, c are colinear
   return (cross(a, b) == 0) && (cross(a, c) == 0);
+}
+
+int lowest_then_leftmost(vector<point> &A) {
+    // returns the index of the lowest then leftmost point of the set of points
+    int ltl = 0, n = A.size();
+
+    for(int i=1; i<n; i++) {
+        if((A[i].y < A[ltl].y) || (A[i].y == A[ltl].y && A[i].x < A[ltl].x))
+            ltl = i;
+    }
+
+    return ltl;
 }
